@@ -4,7 +4,7 @@ import { renderReplayTemplate } from '../templates';
 
 const getReplay = async (id: string, password?: string) => {
   try {
-    const {data} = await Axios.post('https://clover.weedl.es/~~clodown/api/getreplay', {
+    const {data} = await Axios.post('http://sim.thetrainercorner.net/', {
       id,
       password,
     }, { responseType: 'text' });
