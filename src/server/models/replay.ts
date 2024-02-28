@@ -5,11 +5,11 @@ export interface IReplay {
   log: string;
   players: string[];
   format: string;
-  rating: string;
-  private: string;
-  password: string;
-  inputlog: string;
-  uploadtime: string;
+  rating?: string;
+  private?: string;
+  password?: string;
+  inputlog?: string;
+  uploadtime?: string;
 }
 
 const ReplaySchema = new Schema<IReplay>({
