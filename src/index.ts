@@ -18,7 +18,7 @@ try {
 
   discordClient.on("sendReplay", async(data: IReplay) => {
     console.log(data);
-    if (data.server_url && data.server_url === 'replay.thetrainercorner.net') {
+    if (data.server_url && data.server_url === 'server.thetrainercorner.net') {
       data.format = "test_server"
     }
     const replayChannel = await ReplayChannels.findOne({format_id: data.format});
