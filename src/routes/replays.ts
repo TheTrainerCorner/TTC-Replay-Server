@@ -35,7 +35,10 @@ router.route('/:id').get(async(req, res)=> {
 		buf += '</div>\n';
 		buf += '</div>\n';
 		buf += '<script>\n';
-		buf += `let daily = Math.floor(Date.now()/1000/60/60/24);document.write('<script src="https://play.thetrainercorner.net/js/replay-embed.js?version'+daily+'"></'+'script><script src="https://play.pokemonshowdown.com/js/replay-embed.js?version'+daily+'"></'+'script>);\n`;
+		buf += `let daily = Math.floor(Date.now()/1000/60/60/24);`
+    + `document.write('`
+    + `<script src="https://play.thetrainercorner.net/js/replay-embed.js?version'+daily+'"></script>`
+    + `<script src="https://play.pokemonshowdown.com/js/replay-embed.js?version'+daily+'"></script>');\n`;
 		buf += '</script>\n';
     return res.status(200).send(buf);
 });
