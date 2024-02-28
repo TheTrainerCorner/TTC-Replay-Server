@@ -2,7 +2,7 @@ import { Router } from "express";
 import Replay from "../models/replay";
 const router = Router();
 
-router.route('/replay').post(async (req, res) => {
+router.route('/').post(async (req, res) => {
   const newReplay = new Replay({
     id: req.body.id,
     log: req.body.id,
@@ -17,7 +17,7 @@ router.route('/replay').post(async (req, res) => {
 
   await newReplay.save();
 });
-router.route('/replay/:id').get(async(req, res)=> {
+router.route('/:id').get(async(req, res)=> {
   return res.send("Success");
 });
 
