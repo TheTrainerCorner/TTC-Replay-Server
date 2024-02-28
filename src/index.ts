@@ -38,7 +38,7 @@ try {
     const analyze = analyzer.data;
     if (isDone) {
             let str = "";
-            str += `Winner: ${analyze.winner}\n`;
+            str += `||Winner: ${analyze.winner}\n`;
             let score = analyze.p1.pokemon.length;
             analyze.p1.pokemon.forEach((x) => {
               if (x.isDead) score -= 1;
@@ -51,7 +51,7 @@ try {
               if (x.isDead) score -= 1;
             });
 
-            str += `${score}`;
+            str += `${score}||`;
             str += "\n";
             str += "\n";
             str += `${analyze.p1.username}\n||`;
