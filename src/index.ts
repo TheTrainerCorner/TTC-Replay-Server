@@ -9,11 +9,7 @@ const PORT = 8080;
 try {
   app.use(express.json());
   
-  app.use("/replay", replayRouter);
-
-  app.get("/", (req, res) => {
-    res.send("Hello");
-  });
+  app.use("/", replayRouter);
   
   app.listen(PORT, () => {
     mongoose.connect(process.env.MONGODB_CONNECT_URI as string);
