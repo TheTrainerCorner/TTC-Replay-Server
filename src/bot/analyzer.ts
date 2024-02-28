@@ -101,7 +101,7 @@ export class Analyzer implements IAnalyzer {
             break;
           case "win":
             this.data.winner = sections[0];
-            console.log("Done Analyzing. Result is in './output.txt'.");
+            console.log("Done Analyzing!");
             /**
              * Structure
              * --------------------------------------
