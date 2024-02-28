@@ -6,7 +6,7 @@ router.route('/').post(async (req, res) => {
   console.debug(req);
   const newReplay = new Replay({
     id: req.body.id,
-    log: req.body.id,
+    log: req.body.log,
     players: req.body.players,
     format: req.body.format,
     rating: req.body.rating,
