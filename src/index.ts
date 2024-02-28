@@ -7,7 +7,7 @@ require("dotenv").config();
 const app = express();
 const PORT = 8080;
 
-app.use("/replays", replayRouter);
+app.use("/replay", replayRouter);
 
 app.get("/", (req, res) => {
   res.send("Hello");
