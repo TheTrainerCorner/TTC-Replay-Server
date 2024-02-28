@@ -1,21 +1,17 @@
-import Koa from 'koa';
-import KoaBody from 'koa-body';
-import Router from 'koa-router';
-import { createReplayRouter, createUsersRouter } from './routes';
+import express from "express";
 
-const createApp = () => {
-  const app = new Koa();
-  app.use(KoaBody());
+// Routers
+import replayRouter from "./routes/replays";
 
-  const router = new Router();
-  const replaysRouter = createReplayRouter();
-  const usersRouter = createUsersRouter();
-  router.use('/replays', replaysRouter.routes(), replaysRouter.allowedMethods());
-  router.use('/users', usersRouter.routes(), usersRouter.allowedMethods());
+const app = express();
+const PORT = 9000;
 
-  app.use(router.routes());
-  return app;
-};
+app.use("/replays", replayRouter);
 
-const app = createApp();
-app.listen(9090);
+app.get("/", (req, res) => {
+  res.send("Hello");
+});
+
+app.listen(PORT, () => {
+  console.log(`Listening on port ${PORT}`);
+});
