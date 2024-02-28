@@ -4,7 +4,6 @@ import { discordClient } from "../../global/constants";
 const router = Router();
 
 router.route("/").post(async (req, res) => {
-  console.debug(req);
   const newReplay = new Replay({
     id: req.body.id,
     log: req.body.log,
@@ -16,7 +15,7 @@ router.route("/").post(async (req, res) => {
     inputlog: req.body.inputlog,
     uploadtime: req.body.uploadtime,
   });
-
+  discordClient.emit("sendReplay", newReplay)
   await newReplay.save();
 });
 router.route("/:id").get(async (req, res) => {
@@ -47,7 +46,7 @@ router.route("/:id").get(async (req, res) => {
     `<script src="https://play.thetrainercorner.net/js/replay-embed.js?version'+daily+'"></script>` +
     `<script src="https://play.pokemonshowdown.com/js/replay-embed.js?version'+daily+'"></script>');\n`;
   buf += "</script>\n";
-  discordClient.emit("sendReplay", replay)
+
   return res.status(200).send(buf);
 });
 
