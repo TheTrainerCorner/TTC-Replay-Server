@@ -18,7 +18,7 @@ router.route('/').post(async (req, res) => {
 
   await newReplay.save();
 });
-router.route('/replay/:id').get(async(req, res)=> {
+router.route('/:id').get(async(req, res)=> {
   const replay = await Replay.findOne<IReplay>({id: req.params.id}).exec();
   if (!replay) {
     res.status(404).send("Could not find that replay");
