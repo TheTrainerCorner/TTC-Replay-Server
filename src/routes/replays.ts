@@ -3,6 +3,7 @@ import Replay from "../models/replay";
 const router = Router();
 
 router.route('/').post(async (req, res) => {
+  console.debug(req);
   const newReplay = new Replay({
     id: req.body.id,
     log: req.body.id,
