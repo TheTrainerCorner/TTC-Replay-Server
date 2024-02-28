@@ -1,7 +1,7 @@
 import { IReplay } from "../../server/models/replay";
 
 export interface IDiscordClientEvents {
-  sendReplay: (data: IReplay) => Promise<void>;
+  sendReplay: (data: IReplay, server_url?: string) => Promise<void>;
 }
 
 export interface IDiscordClient {

@@ -4,6 +4,7 @@ import { discordClient } from "../../global/constants";
 const router = Router();
 
 router.route("/").post(async (req, res) => {
+  console.debug(req);
   const newReplay = new Replay({
     id: req.body.id,
     log: req.body.log,
@@ -15,7 +16,7 @@ router.route("/").post(async (req, res) => {
     inputlog: req.body.inputlog,
     uploadtime: req.body.uploadtime,
   });
-  discordClient.emit("sendReplay", newReplay)
+  discordClient.emit("sendReplay", newReplay, req.baseUrl);
   await newReplay.save();
 });
 router.route("/:id").get(async (req, res) => {
