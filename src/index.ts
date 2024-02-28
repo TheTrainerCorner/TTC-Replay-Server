@@ -5,7 +5,7 @@ import {router as replayRouter} from "./routes/replays";
 import mongoose from "mongoose";
 require("dotenv").config();
 const app = express();
-const PORT = 8000;
+const PORT = 8080;
 
 app.use("/replays", replayRouter);
 
