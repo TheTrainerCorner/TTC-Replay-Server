@@ -2,35 +2,26 @@ import { Schema, model } from "mongoose";
 
 export interface IReplay {
   id: string;
-  p1: string;
-  p2: string;
-  format: string;
   log: string;
-  inputlog: string;
-  uploadtime: string;
-  views: string;
-  p1id: string;
-  p2id: string;
-  formatid: string;
+  players: string[];
+  format: string;
   rating: string;
   private: string;
-  password?: string;
+  password: string;
+  inputlog: string;
+  uploadtime: string;
 }
 
-const replaySchema = new Schema<IReplay>({
+const ReplaySchema = new Schema<IReplay>({
   id: String,
-  p1: String,
-  p2: String,
-  format: String,
   log: String,
-  inputlog: String,
-  views: String,
-  p1id: String,
-  p2id: String,
-  formatid: String,
+  players: [String],
+  format: String,
   rating: String,
   private: String,
   password: String,
+  inputlog: String,
+  uploadtime: String,
 });
 
-export default model<IReplay>("replays", replaySchema);
+export default model<IReplay>("replays", ReplaySchema);
