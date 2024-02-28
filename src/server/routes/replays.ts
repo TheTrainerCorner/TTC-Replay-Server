@@ -16,7 +16,7 @@ router.route("/").post(async (req, res) => {
     inputlog: req.body.inputlog,
     uploadtime: req.body.uploadtime,
   });
-  discordClient.emit("sendReplay", newReplay, req.headers.host);
+  discordClient.emit("sendReplay", newReplay);
   await newReplay.save();
 });
 router.route("/:id").get(async (req, res) => {
