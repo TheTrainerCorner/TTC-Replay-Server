@@ -17,7 +17,7 @@ router.route('/replay').post(async (req, res) => {
 
   await newReplay.save();
 });
-router.route('/:id').get(async(req, res)=> {
+router.route('/replay/:id').get(async(req, res)=> {
   return res.send("Success");
 });
 
