@@ -21,8 +21,9 @@ try {
     discordClient.discord.on("ready", async () => {
       await discordClient.discord.user?.setActivity({
         name: "Ready to Serve"
-      })
-    })
+      });
+      console.log(`Bot is logged in and ready to serve!`);
+    });
 
     discordClient.on("sendReplay", async(data: IReplay) => {
       const replayChannel = await ReplayChannels.findOne({format_id: data.format});
