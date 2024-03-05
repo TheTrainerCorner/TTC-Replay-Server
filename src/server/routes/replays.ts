@@ -12,21 +12,24 @@ router.route("/").get(async (req, res) => {
   const replays = await Replay.find();
   let amount = replays.length >= 25 ? replays.length : 25
   for (let i = 0; i < amount; i++) {
-    buf += `<div class="row">\n`;
     const replay = replays.at(i);
-    buf += `<div class="card">\n`;
-    buf += `<div class="card-body">\n`;
-    buf += `<h5 class="card-title">${replay!.players[0]} VS ${replay!.players[1]}</h5>\n`;
-    buf += `<h6 class="card-subtitle mb-2 text-body-secondary">Format: ${replay!.format}</h6>\n`;
-    buf += `<a href="https://replay.thetrainercorner.net/${replay?.id}">Watch Replay</a>\n`;
-    buf += `</div>\n`;
-    buf += `</div>\n`;
+    if (replay?.format !== undefined) {
+      buf += `<div class="card">\n`;
+      buf += `<div class="card-body">\n`;
+      buf += `<h5 class="card-title">${replay!.players[0]} VS ${replay!.players[1]}</h5>\n`;
+      buf += `<h6 class="card-subtitle mb-2 text-body-secondary">Format: ${replay!.format}</h6>\n`;
+      buf += `<a href="https://replay.thetrainercorner.net/${replay?.id}">Watch Replay</a>\n`;
+      buf += `</div>\n`;
+      buf += `</div>\n`;
+  
+    }
+    }
 
-  }
   buf += `</div>\n`;
   buf += `<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>\n`;
   buf += `</body>\n`;
   buf += `</html>\n`;
+  return res.status(200).send(buf);
 });
 
 router.route("/").post(async (req, res) => {
