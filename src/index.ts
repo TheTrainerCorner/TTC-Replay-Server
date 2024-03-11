@@ -53,12 +53,12 @@ try {
             str += "\n";
             str += `${analyze.p1.username}\n||`;
             analyze.p1.pokemon.forEach((x) => {
-              str += `${x.pokemon},${x.kills},${x.isDead ? 1 : 0}\n`;
+              str += `${x.pokemon} | ${x.kills} kills | Death: ${x.isDead ? '❌' : '✅'}\n`;
             });
             str += "||\n";
             str += `${analyze.p2.username}\n||`;
             analyze.p2.pokemon.forEach((x) => {
-              str += `${x.pokemon},${x.kills},${x.isDead ? 1 : 0}\n`;
+              str += `${x.pokemon} | ${x.kills} kills | Death: ${x.isDead ? '❌' : '✅'}\n`;
             });
             str += "||";
             embed.setDescription(str);
