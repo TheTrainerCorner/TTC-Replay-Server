@@ -35,6 +35,11 @@ router.route("/").get(async (req, res) => {
 
 router.route("/").post(async (req, res) => {
   console.debug(req.headers.host);
+  if (!req.body.id) return res.sendStatus(400)
+  if (!req.body.log) return res.sendStatus(400);
+  if (!req.body.players) return res.sendStatus(400);
+  if (!req.body.format) return res.sendStatus(400);
+  if (!req.body.rating) return res.sendStatus(400); 
   const newReplay = new Replay({
     id: req.body.id,
     log: req.body.log,
