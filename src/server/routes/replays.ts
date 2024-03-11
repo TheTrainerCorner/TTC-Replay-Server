@@ -10,7 +10,7 @@ router.route("/").get(async (req, res) => {
   buf += `<div class="container text-center">\n`;
   
   let replays = await Replay.find();
-  replays = replays.sort((a, b) => Number(b.id.split("-")[1] as string) - Number(a.id.split("-")[1] as string))
+  replays = replays.reverse();
   let amount = replays.length >= 25 ? replays.length : 25
   for (let i = 0; i < amount; i++) {
     const replay = replays.at(i);
