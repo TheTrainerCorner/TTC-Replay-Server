@@ -9,7 +9,8 @@ router.route("/").get(async (req, res) => {
   buf += `<body><ul class="nav justify-content-center"><li class="nav-item"><a class="nav-link active" aria-current="page" href="https://play.thetrainercorner.net">Main Server</a></li><li class="nav-item"><a class="nav-link" href="https://test.thetrainercorner.net">Test Server</a></li><li class="nav-item"><a class="nav-link" href="https://dex.thetrainercorner.net">Dex Site</a></li><li class="nav-item"><a class="nav-link disabled" aria-disabled="true">Replay Server</a></li></ul>`;
   buf += `<div class="container text-center">\n`;
   
-  const replays = await Replay.find();
+  let replays = await Replay.find();
+  replays = replays.sort((a, b) => Number(b.uploadtime as string) - Number(a.uploadtime as string))
   let amount = replays.length >= 25 ? replays.length : 25
   for (let i = 0; i < amount; i++) {
     const replay = replays.at(i);
