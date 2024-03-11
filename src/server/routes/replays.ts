@@ -10,7 +10,7 @@ router.route("/").get(async (req, res) => {
   buf += `<div class="container text-center">\n`;
   
   let replays = await Replay.find();
-  replays = replays.sort((a, b) => Number(b.uploadtime as string) - Number(a.uploadtime as string))
+  replays = replays.sort((a, b) => Number(a.uploadtime as string) - Number(b.uploadtime as string))
   let amount = replays.length >= 25 ? replays.length : 25
   for (let i = 0; i < amount; i++) {
     const replay = replays.at(i);
