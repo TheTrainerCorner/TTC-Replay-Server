@@ -2,10 +2,10 @@ import { SlashCommandBuilder } from "discord.js";
 import CommandContext from "../contexts/CommandContext";
 
 export abstract class BaseCommand {
-	private _slashData: SlashCommandBuilder;
+	private _slashData: Omit<SlashCommandBuilder, "addSubcommand" | "addSubcommandGroup">;
 	private _disabled: boolean;
 	
-	constructor(slashData: SlashCommandBuilder, disabled: boolean = false) {
+	constructor(slashData: Omit<SlashCommandBuilder, "addSubcommand" | "addSubcommandGroup">, disabled: boolean = false) {
 		this._slashData = slashData;
 		this._disabled = disabled;
 	}
