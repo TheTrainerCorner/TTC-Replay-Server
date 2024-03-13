@@ -1,4 +1,4 @@
-import { IAnalyzer } from "./interfaces/IAnalyzer";
+import { IAnalyzer } from "../interfaces/IReplay";
 
 export class Analyzer implements IAnalyzer {
   data: {

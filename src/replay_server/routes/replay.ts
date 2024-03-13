@@ -1,6 +1,6 @@
 import { Router } from "express";
-import Replay, { IReplay } from "../models/replay";
-import { discordClient } from "../../global/constants";
+import Replay, { IReplay } from "./../../database/models/replay";
+import { client } from "../../client/core/client";
 const router = Router();
 
 router.route("/").get(async (req, res) => {
@@ -51,7 +51,7 @@ router.route("/").post(async (req, res) => {
     inputlog: req.body.inputlog,
     uploadtime: req.body.uploadtime,
   });
-  discordClient.emit("sendReplay", newReplay);
+  client.emit("sendReplay", newReplay);
   await newReplay.save();
 });
 router.route("/:id").get(async (req, res) => {
