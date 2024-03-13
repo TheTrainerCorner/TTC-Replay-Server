@@ -142,7 +142,6 @@ export class Analyzer implements IAnalyzer {
           case "switch":
           case "drag":
             let ste = sections[0].split(":");
-            console.log(ste);
             if (ste[0].replace("a", "") === "p1") {
               this.data.current.p1 = sections[1].includes(",")
                 ? sections[1].split(",")[0]
