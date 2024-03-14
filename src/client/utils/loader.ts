@@ -11,7 +11,7 @@ export default class Loader {
   public rootFolder = "src/client";
   public commandFolder = "commands";
   public eventFolder = "events";
-  public serverEventFolder = "server";
+  public serverEventFolder = "servers";
   public monitorFolder = "monitors";
   public taskFolder = "tasks";
 
@@ -63,6 +63,7 @@ export default class Loader {
         cache.server.events.set(serverEvent.name, serverEvent);
       }
     }
+    console.log(`Successfully loaded ${cache.server.events.size} server events`);
   }
 
   public async loadMonitors() {
