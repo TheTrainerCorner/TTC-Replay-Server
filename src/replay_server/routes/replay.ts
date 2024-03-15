@@ -51,10 +51,10 @@ router.route("/").post(async (req, res) => {
     inputlog: req.body.inputlog,
     uploadtime: req.body.uploadtime,
   });
+  await newReplay.save();
   await axios.post("https://main.thetrainercorner.net/api/discord/replay", {
     replay_id: req.body.id,
   });
-  await newReplay.save();
 });
 router.route("/:id").get(async (req, res) => {
   const replay = await Replay.findOne<IReplay>({ id: req.params.id }).exec();
