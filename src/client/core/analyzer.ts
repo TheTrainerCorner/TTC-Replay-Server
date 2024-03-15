@@ -85,14 +85,14 @@ export class Analyzer implements IAnalyzer {
             if (sections[0] === "p1") {
               this.data.p1.pokemon.push({
                 nickname: "",
-                pokemon: sections[1].split(",")[0],
+                pokemon: sections[1].split(",")[0].replace("-*", ""),
                 kills: 0,
                 isDead: false,
               });
             } else {
               this.data.p2.pokemon.push({
                 nickname: "",
-                pokemon: sections[1].split(",")[0],
+                pokemon: sections[1].split(",")[0].replace("-*", ""),
                 kills: 0,
                 isDead: false,
               });
@@ -155,6 +155,7 @@ export class Analyzer implements IAnalyzer {
               this.data.current.p1 = sections[1].includes(",")
                 ? sections[1].split(",")[0]
                 : sections[1];
+              console.log(this.data.p1.pokemon);
               this.data.p1.pokemon.find(
                 (x) => x.pokemon === this.data.current.p1
               )!.nickname = ste[1].trim();
