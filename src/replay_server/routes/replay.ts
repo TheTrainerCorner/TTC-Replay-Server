@@ -1,6 +1,6 @@
 import { Router } from "express";
 import Replay, { IReplay } from "./../../database/models/replay";
-import { client } from "../../client/core/client";
+import axios from "axios";
 const router = Router();
 
 router.route("/").get(async (req, res) => {
@@ -51,7 +51,9 @@ router.route("/").post(async (req, res) => {
     inputlog: req.body.inputlog,
     uploadtime: req.body.uploadtime,
   });
-  client.emit("sendReplay", newReplay);
+  await axios.post("https://thetrainercorner.net/api/discord/replay", {
+    replay_id: req.body.id,
+  });
   await newReplay.save();
 });
 router.route("/:id").get(async (req, res) => {
