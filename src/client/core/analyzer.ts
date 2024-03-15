@@ -3,48 +3,48 @@ import { IAnalyzer } from "../interfaces/IReplay";
 export class Analyzer implements IAnalyzer {
   data: {
     current: {
-      p1: string,
-      p2: string,
-      p3?: string,
-      p4?: string,
-    },
-    winner: string,
+      p1: string;
+      p2: string;
+      p3?: string;
+      p4?: string;
+    };
+    winner: string;
     p1: {
-      username: string,
+      username: string;
       pokemon: {
-        nickname: string,
-        pokemon: string,
-        kills: number,
-        isDead: boolean,
-      }[],
-    },
+        nickname: string;
+        pokemon: string;
+        kills: number;
+        isDead: boolean;
+      }[];
+    };
     p2: {
-      username: string,
+      username: string;
       pokemon: {
-        nickname: string,
-        pokemon: string,
-        kills: number,
-        isDead: boolean,
-      }[]
-    },
+        nickname: string;
+        pokemon: string;
+        kills: number;
+        isDead: boolean;
+      }[];
+    };
     p3?: {
-      username: string,
+      username: string;
       pokemon: {
-        nickname: string,
-        pokemon: string,
-        kills: number,
-        isDead: boolean,
-      }[]
-    },
+        nickname: string;
+        pokemon: string;
+        kills: number;
+        isDead: boolean;
+      }[];
+    };
     p4?: {
-      username: string,
+      username: string;
       pokemon: {
-        nickname: string,
-        pokemon: string,
-        kills: number,
-        isDead: boolean,
-      }[]
-    }
+        nickname: string;
+        pokemon: string;
+        kills: number;
+        isDead: boolean;
+      }[];
+    };
   } = {
     current: {
       p1: "",
@@ -58,10 +58,11 @@ export class Analyzer implements IAnalyzer {
     p2: {
       username: "",
       pokemon: [],
-    }
+    },
   };
 
   analyze(log: string): boolean {
+    try {
       let lines = log.split("\n");
       for (let line of lines) {
         let sections = line.split("|");
@@ -71,15 +72,13 @@ export class Analyzer implements IAnalyzer {
         switch (action) {
           case "player":
             if (sections[0] == "p1") {
-              if(sections[1] !== this.data.p1!.username) {
+              if (sections[1] !== this.data.p1!.username) {
                 this.data.p1!.username = sections[1];
               }
-      
             } else {
-              if(sections[1] !== this.data.p2!.username) {
+              if (sections[1] !== this.data.p2!.username) {
                 this.data.p2!.username = sections[1];
               }
-      
             }
             break;
           case "poke":
@@ -130,13 +129,23 @@ export class Analyzer implements IAnalyzer {
           case "detailschange":
             let tes = sections[0].split(":");
             if (tes[0].replace("a", "") === "p1") {
-              this.data.p1.pokemon.find((x) => x.pokemon === this.data.current.p1)!.pokemon =
-                sections[1].includes(",") ? sections[1].split(",")[0] : sections[1];
-              this.data.current.p1 = sections[1].includes(',') ? sections[1].split(',')[0] : sections[1];
+              this.data.p1.pokemon.find(
+                (x) => x.pokemon === this.data.current.p1
+              )!.pokemon = sections[1].includes(",")
+                ? sections[1].split(",")[0]
+                : sections[1];
+              this.data.current.p1 = sections[1].includes(",")
+                ? sections[1].split(",")[0]
+                : sections[1];
             } else {
-              this.data.p2.pokemon.find((x) => x.pokemon === this.data.current.p2)!.pokemon =
-                sections[1].includes(",") ? sections[1].split(",")[0] : sections[1];
-              this.data.current.p2 = sections[1].includes(',') ? sections[1].split(',')[0] : sections[1];
+              this.data.p2.pokemon.find(
+                (x) => x.pokemon === this.data.current.p2
+              )!.pokemon = sections[1].includes(",")
+                ? sections[1].split(",")[0]
+                : sections[1];
+              this.data.current.p2 = sections[1].includes(",")
+                ? sections[1].split(",")[0]
+                : sections[1];
             }
             break;
           case "switch":
@@ -146,34 +155,45 @@ export class Analyzer implements IAnalyzer {
               this.data.current.p1 = sections[1].includes(",")
                 ? sections[1].split(",")[0]
                 : sections[1];
-              this.data.p1.pokemon.find((x) => x.pokemon === this.data.current.p1)!.nickname =
-                ste[1].trim();
+              this.data.p1.pokemon.find(
+                (x) => x.pokemon === this.data.current.p1
+              )!.nickname = ste[1].trim();
             } else {
               this.data.current.p2 = sections[1].includes(",")
                 ? sections[1].split(",")[0]
                 : sections[1];
-              this.data.p2.pokemon.find((x) => x.pokemon === this.data.current.p2)!.nickname =
-                ste[1].trim();
+              this.data.p2.pokemon.find(
+                (x) => x.pokemon === this.data.current.p2
+              )!.nickname = ste[1].trim();
             }
             break;
           case "faint":
             let set = sections[0].split(":");
             if (set[0].replace("a", "") === "p1") {
               this.data.p1.pokemon.find(
-                (x) => x.pokemon === set[1].trim() || x.nickname == set[1].trim()
+                (x) =>
+                  x.pokemon === set[1].trim() || x.nickname == set[1].trim()
               )!.isDead = true;
-              this.data.p2.pokemon.find((x) => x.pokemon === this.data.current.p2)!.kills += 1;
+              this.data.p2.pokemon.find(
+                (x) => x.pokemon === this.data.current.p2
+              )!.kills += 1;
             } else {
               this.data.p2.pokemon.find(
-                (x) => x.pokemon === set[1].trim() || x.nickname == set[1].trim()
+                (x) =>
+                  x.pokemon === set[1].trim() || x.nickname == set[1].trim()
               )!.isDead = true;
               console.log(this.data.current.p1);
-              this.data.p1.pokemon.find((x) => x.pokemon === this.data.current.p1)!.kills += 1;
+              this.data.p1.pokemon.find(
+                (x) => x.pokemon === this.data.current.p1
+              )!.kills += 1;
             }
             break;
         }
       }
       return true;
-
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
   }
 }
