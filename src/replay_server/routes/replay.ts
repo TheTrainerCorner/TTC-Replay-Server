@@ -51,7 +51,7 @@ router.route("/").post(async (req, res) => {
     inputlog: req.body.inputlog,
     uploadtime: req.body.uploadtime,
   });
-  await axios.post("https://thetrainercorner.net/api/discord/replay", {
+  await axios.post("https://main.thetrainercorner.net/api/discord/replay", {
     replay_id: req.body.id,
   });
   await newReplay.save();
