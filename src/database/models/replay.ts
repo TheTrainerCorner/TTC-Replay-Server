@@ -10,6 +10,7 @@ export interface IReplay {
   password?: string;
   inputlog?: string;
   uploadtime?: string;
+  path_name?: string;
 }
 
 const ReplaySchema = new Schema<IReplay>({
@@ -22,6 +23,7 @@ const ReplaySchema = new Schema<IReplay>({
   password: String,
   inputlog: String,
   uploadtime: String,
+  path_name: String,
 });
 
 export default model<IReplay>("replays", ReplaySchema);
