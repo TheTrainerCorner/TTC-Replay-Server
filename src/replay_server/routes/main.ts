@@ -58,29 +58,6 @@ router
 		main,
 		servers
 	});
-  })
-  .post(async (req, res) => {
-    if (!req.body.id) return res.sendStatus(400);
-    if (!req.body.log) return res.sendStatus(400);
-    if (!req.body.players) return res.sendStatus(400);
-    if (!req.body.format) return res.sendStatus(400);
-    if (!req.body.rating) return res.sendStatus(400);
-    const newReplay = new Replay({
-      id: req.body.id,
-      log: req.body.log,
-      players: req.body.players,
-      format: req.body.format,
-      rating: req.body.rating,
-      private: req.body.private,
-      password: req.body.password,
-      inputlog: req.body.inputlog,
-      uploadtime: req.body.uploadtime,
-      path_name: "ttc",
-    });
-    await newReplay.save();
-    await axios.post("https://main.thetrainercorner.net/api/discord/replay", {
-      replay_id: req.body.id,
-    });
   });
 
 export { router };

@@ -55,6 +55,12 @@ router
       path_name: req.params.path_name,
     });
     await newReplay.save();
+
+    if (server.path_name === "ttc") {
+      await axios.post("https://main.thetrainercorner.net/api/discord/replay", {
+        replay_id: req.body.id,
+      });
+    }
   })
   .get(async (req, res) => {
     const server = await ShowdownServers.findOne({
@@ -89,24 +95,25 @@ router.route("/:path_name/:id").get(async (req, res) => {
   }).exec();
 
   if (!replay) {
-	if (server.path_name === 'ttc') {
-		replay = await Replay.findOne<IReplay>({
-			id: req.params.id,
-			path_name: undefined,
-		});
-	}
-	if (!replay) {
-		return res
-		.status(404)
-		.send(`That replay doesn't seem to exist for this showdown server.`);
-	}
-    
+    if (server.path_name === "ttc") {
+      replay = await Replay.findOne<IReplay>({
+        id: req.params.id,
+        path_name: undefined,
+      });
+    }
+    if (!replay) {
+      return res
+        .status(404)
+        .send(`That replay doesn't seem to exist for this showdown server.`);
+    }
   }
   let buf = "<!DOCTYPE html>\n";
   buf += '<meta charset="utf-8" />\n';
   buf += "<!-- version 1 -->\n";
   buf += `<title>${replay.format} replay: ${replay.players[0]} vs. ${replay.players[1]}</title>\n`;
-  buf += `<a href="https://replay.thetrainercorner.net/${replay.path_name || "ttc"}"><button>Back to replay server</button></a>\n`;
+  buf += `<a href="https://replay.thetrainercorner.net/${
+    replay.path_name || "ttc"
+  }"><button>Back to replay server</button></a>\n`;
   buf +=
     '<div class="wrapper replay-wrapper" style="max-width:1180px;margin:0 auto">\n';
   buf +=
