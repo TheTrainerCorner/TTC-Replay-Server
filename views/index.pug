@@ -1,0 +1,27 @@
+extends base/base.pug
+block append nav-title
+	a.navbar-brand(href='/') The Trainer's Corner
+block append nav
+	li.nav-item
+		a.nav-link(href=`${main.discord_server_url}`) Discord Server
+block content
+	.card.text-center
+		.card-header
+			h1 Welcome to The Trainer's Corner (TTC)'s Replay Server!
+		.card-body
+			p If you are looking for TTC's replays, then click on the button below
+			a(href=`/ttc`)
+				button.btn.btn-primary.rounded TTC's Replay
+		.card-footer
+	br
+	.card.text-center
+		.card-header
+			h1 Want to use our replay server?
+		.card-body
+			p If you would like to use our replay server for your own server, then please join our discord server and talk to Koreanpanda345!
+			p All servers will have their own section of the replay server. Here are some of the servers that are using our replay server!
+			.btn-group(role="group", aria-lable="Server Buttons")
+				each server in servers
+					if server.path_name !== 'ttc'
+						a(href=`/${server.path_name}`)
+							button(role="button").btn.btn-primary #{server.server_name}

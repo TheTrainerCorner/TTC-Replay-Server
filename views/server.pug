@@ -1,0 +1,30 @@
+extends base/base.pug
+block nav-title
+	a.navbar-brand(href=`/`) #{server.server_name}
+block nav
+	if server.server_url
+		li.nav-item
+			a.nav-link(href=`${server.server_url}`) Main Server
+	if server.test_server_url
+		li.nav-item
+			a.nav-link(href=`${server.test_server_url}`) Test Server
+	if server.dex_site_url
+		li.nav-item
+			a.nav-link(href=`${server.dex_site_url}`) Dex Site
+	if server.discord_server_url
+		li.nav-item
+			a.nav-link(href=`${server.discord_server_url}`) Discord Server
+block content
+	.card.text-center
+		.card-header
+			h1= `${server.server_name}`
+		.card-body
+			img(src=`${server.banner_image_url}`)
+			p= `${server.description}`
+		.card-footer
+			h4= `Owner: ${server.owner_username}`
+	br
+	h2.text-center Replays
+	each replay in replays
+		include mixins/replay_card.pug
+		+replay_card()(replay=replay, server=server)

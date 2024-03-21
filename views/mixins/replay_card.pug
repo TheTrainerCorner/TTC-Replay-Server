@@ -1,0 +1,12 @@
+mixin replay_card
+	.card
+		.card-header.text-center
+			.card-title
+				h3= `${replay.players[0]} vs ${replay.players[1]}`
+			.card-subtitle
+				h6= `Format: ${replay.format}`
+		.card-body.text-center
+			p=`Id: ${replay.id}`
+		.card-footer.text-center
+			a(href=`/${server.path_name}/${replay.id}`)
+				button(role="button").btn.btn-dark Watch here
