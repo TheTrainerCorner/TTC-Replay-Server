@@ -55,12 +55,13 @@ router
       path_name: req.params.path_name,
     });
     await newReplay.save();
-
+	
     if (server.path_name === "ttc") {
       await axios.post("https://main.thetrainercorner.net/api/discord/replay", {
         replay_id: req.body.id,
       });
     }
+	return res.status(200).send("Replay has been saved!");
   })
   .get(async (req, res) => {
     const server = await ShowdownServers.findOne({
