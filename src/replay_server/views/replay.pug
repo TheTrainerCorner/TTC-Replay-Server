@@ -1,0 +1,37 @@
+extends base/base.pug
+block title
+	| #{server.path_name.toUpperCase()} | #{replay.format} replay: #{replay.players[0]} vs #{replay.players[1]}
+block nav-title
+	a.navbar-brand(href=`/`) #{server.server_name}
+block nav
+	if server.server_url
+		li.nav-item
+			a.nav-link(href=`${server.server_url}`) Main Server
+	if server.test_server_url
+		li.nav-item
+			a.nav-link(href=`${server.test_server_url}`) Test Server
+	if server.dex_site_url
+		li.nav-item
+			a.nav-link(href=`${server.dex_site_url}`) Dex Site
+	if server.discord_server_url
+		li.nav-item
+			a.nav-link(href=`${server.discord_server_url}`) Discord Server
+block content
+	a(href=`/${server.path_name}`)
+		button.btn.btn-outline-light Back to the Replay List
+	.wrapper.replay-wrapper
+		.battle
+		.battle-log
+		.replay-controls
+		.replay-controls-2
+		h1
+			| #{replay.format}
+			br
+			a(href=`https://pokemonshowdown.com/users/${replay.players[0]}`, target="_blank").subtle #{replay.players[0]}
+			| vs
+			a(href=`http://pokemonshowdown.com/users/${replay.players[1]}`, target="_blank").subtle #{replay.players[1]}
+		script(type="text/plain").battle-log-data
+			| #{replay.log.replace(/\//g, "\\/")}
+	script(src=`${server.server_url}/js/replay-embed.js`)
+	script(src=`https://play.pokemonshowdown.com/js/replay-embed.js?version${Math.floor(Date.now()/1000/60/60/24)}`)
+	div
