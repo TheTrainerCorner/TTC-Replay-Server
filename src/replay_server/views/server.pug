@@ -1,4 +1,6 @@
 extends base/base.pug
+block title
+	| #{server.server_name} | Replays
 block nav-title
 	a.navbar-brand(href=`/`) #{server.server_name}
 block nav
@@ -16,15 +18,15 @@ block nav
 			a.nav-link(href=`${server.discord_server_url}`) Discord Server
 block content
 	.card.text-center
-		.card-header
+		.card-header.bg-dark.text-light
 			h1= `${server.server_name}`
 		.card-body
 			img(src=`${server.banner_image_url}`)
 			p= `${server.description}`
-		.card-footer
+		.card-footer.bg-dark.text-light
 			h4= `Owner: ${server.owner_username}`
 	br
-	h2.text-center Replays
+	h2.text-center.bg-dark.text-light Replays
 	each replay in replays
 		include mixins/replay_card.pug
 		+replay_card()(replay=replay, server=server)

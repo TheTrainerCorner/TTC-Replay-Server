@@ -6,16 +6,16 @@ block append nav
 		a.nav-link(href=`${main.discord_server_url}`) Discord Server
 block content
 	.card.text-center
-		.card-header
+		.card-header.bg-dark.text-light
 			h1 Welcome to The Trainer's Corner (TTC)'s Replay Server!
 		.card-body
 			p If you are looking for TTC's replays, then click on the button below
 			a(href=`/ttc`)
 				button.btn.btn-primary.rounded TTC's Replay
-		.card-footer
+		.card-footer.bg-dark.text-light
 	br
 	.card.text-center
-		.card-header
+		.card-header.bg-dark.text-light
 			h1 Want to use our replay server?
 		.card-body
 			p If you would like to use our replay server for your own server, then please join our discord server and talk to Koreanpanda345!
@@ -25,3 +25,4 @@ block content
 					if server.path_name !== 'ttc'
 						a(href=`/${server.path_name}`)
 							button(role="button").btn.btn-primary #{server.server_name}
+		.card-footer.bg-dark.text-light

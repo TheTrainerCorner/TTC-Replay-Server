@@ -80,7 +80,7 @@ router
     const replays = await Replay.find({ path_name: req.params.path_name });
     return res.status(200).render("server.pug", {
       server: server,
-      replays: replays,
+      replays: replays.reverse(),
     });
   });
 
