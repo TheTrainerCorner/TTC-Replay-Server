@@ -20,26 +20,30 @@ router
         );
     }
 
-    if (!req.body.id)
+    if (!req.body.id) {
+      console.log("Doesn't Have an id.");
       return res
         .status(400)
         .send("The requested replay that was recieved did not contain an id!");
-    if (!req.body.log)
-      return res
+    }
+    if (!req.body.log) {
+		console.log("Doesn't have a log")
+		return res
         .status(400)
         .send(`The requested replay (${req.body.id}) is missing the log data!`);
-    if (!req.body.players)
-      return res
+	}
+    if (!req.body.players) {
+		console.log("Doesn't have a players")
+		return res
         .status(400)
-        .send(
-          `The requested replay (${req.body.id}) is missing the players data`
-        );
-    if (!req.body.format)
-      return res
+        .send(`The requested replay (${req.body.id}) is missing the players data!`);
+	}
+    if (!req.body.format) {
+		console.log("Doesn't have a format")
+		return res
         .status(400)
-        .send(
-          `The requested replay (${req.body.id}) is missing the format data!`
-        );
+        .send(`The requested replay (${req.body.id}) is missing the format data!`);
+	}
     if (!req.body.rating) req.body.rating = 0;
 
     const newReplay = new Replay({
@@ -55,13 +59,13 @@ router
       path_name: req.params.path_name,
     });
     await newReplay.save();
-	
+
     if (server.path_name === "ttc") {
       await axios.post("https://main.thetrainercorner.net/api/discord/replay", {
         replay_id: req.body.id,
       });
     }
-	return res.status(200).send("Replay has been saved!");
+    return res.status(200).send("Replay has been saved!");
   })
   .get(async (req, res) => {
     const server = await ShowdownServers.findOne({
